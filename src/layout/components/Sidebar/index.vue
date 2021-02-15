@@ -1,8 +1,10 @@
 <template>
   <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
+    <logo  :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
+			<!-- 设置默认打开侧边栏 -->
       <el-menu
+				:default-openeds="default_openeds_array"
         :default-active="activeMenu"
         :collapse="isCollapse"
         :background-color="variables.menuBg"
@@ -11,6 +13,7 @@
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
         mode="vertical"
+        @open="handleOpen"
       >
         <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
@@ -26,6 +29,11 @@ import variables from '@/styles/variables.scss'
 
 export default {
   components: { SidebarItem, Logo },
+  data(){
+    return{
+      default_openeds_array:['/stu','/alert']
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar'
@@ -36,6 +44,11 @@ export default {
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
+      // let singlePaths=['/dashboard','/charts']
+      // let fpath='/'+path.split('/')[1]
+      // if(this.default_openeds_array.indexOf(fpath)==-1 && singlePaths.indexOf(fpath)==-1){
+      //   this.default_openeds_array.push('/'+path.split('/')[1])
+      //   }
       // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {
         return meta.activeMenu
@@ -51,6 +64,13 @@ export default {
     isCollapse() {
       return !this.sidebar.opened
     }
-  }
+  },
+	methods:{
+		handleOpen(key){
+      if(this.default_openeds_array.indexOf(key)==-1){
+        this.default_openeds_array.push(key)
+      }
+            }
+	}
 }
 </script>

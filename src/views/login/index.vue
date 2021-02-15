@@ -1,54 +1,57 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+    <el-container style="margin:140px 15%;height:63%">
+      <el-aside width="61%" class="login-door">
+      </el-aside>
+      <el-main >
 
-      <div class="title-container">
-        <h3 class="title">Login Form</h3>
-      </div>
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+          <img src="../../assets/logo_white.png" alt='sufe' width="100px" height='100px' class='logo_white'/>
+     <!--    <div class="title-container">
+            <h3 class="title">学业预警系统</h3>
+          </div> -->
 
-      <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
+          <el-form-item prop="username">
+<!--            <span class="svg-container">
+              <svg-icon icon-class="user" />
+            </span> -->
+            <el-input
+              ref="username"
+              v-model="loginForm.username"
+              placeholder="Username"
+              name="username"
+              type="text"
+              tabindex="1"
+              auto-complete="on"
+            />
+          </el-form-item>
 
-      <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
-        <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="Password"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
-      </el-form-item>
+          <el-form-item prop="password">
+<!--            <span class="svg-container">
+              <svg-icon icon-class="password" />
+            </span> -->
+            <el-input
+              :key="passwordType"
+              ref="password"
+              v-model="loginForm.password"
+              :type="passwordType"
+              placeholder="Password"
+              name="password"
+              tabindex="2"
+              auto-complete="on"
+              @keyup.enter.native="handleLogin"
+            />
+           <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+            </span>
+          </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+          <el-button :loading="loading" type="plain" class='login-button' @click.native.prevent="handleLogin">LOGIN
+          </el-button>
+        </el-form>
+      </el-main>
+    </el-container>
 
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div>
-
-    </el-form>
   </div>
 </template>
 
@@ -89,8 +92,11 @@ export default {
   watch: {
     $route: {
       handler: function(route) {
+        console.log(this.redirect)
         this.redirect = route.query && route.query.redirect
+        console.log(this.redirect)
       },
+
       immediate: true
     }
   },
@@ -130,66 +136,139 @@ export default {
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
 $bg:#283443;
-$light_gray:#fff;
-$cursor: #fff;
-
+$light_gray:#1e1e1e;
+$cursor: #550000;
+$border-color:#142559;
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
     color: $cursor;
   }
 }
-
+.el-main{
+  // border-top: 2.5px solid darkblue;
+  // border-right: 2.5px solid darkblue;
+  // border-bottom: 2.5px solid darkblue;
+  // border-top: ;
+  // padding: 3px;
+  // margin: 0;
+  background-color: white;
+  border-top: 4.5px solid rgba($color: #152149, $alpha: 1.0);
+  border-bottom: 4.5px solid rgba($color: #152149, $alpha: 1.0);
+  border-right: 4.5px solid rgba($color: #152149, $alpha: 1.0);
+  }
 /* reset element-ui css */
-.login-container {
-  .el-input {
-    display: inline-block;
-    height: 47px;
-    width: 85%;
+  .login-container {
+    text-align: center;
+    .el-input {
+      // padding-bottom: 0.5px;
 
-    input {
-      background: transparent;
-      border: 0px;
-      -webkit-appearance: none;
-      border-radius: 0px;
-      padding: 12px 5px 12px 15px;
-      color: $light_gray;
-      height: 47px;
-      caret-color: $cursor;
+      display: inline-block;
+      height: 45px;
+      width: 75%;
 
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
+
+      input {
+        border: 0px;
+        border-bottom: 2px solid #b9c1cb;
+        display:table-cell;
+        vertical-align:text-bottom;
+        // 透明
+        background: transparent;
+        // padding: 0;
+        // border: 1px solid red;
+
+
+        // bottom: 0px;
+        // 去除浏览器的默认样式
+        -webkit-appearance: none;
+        border-radius: 0px;
+        padding-left:5px;
+        color: $light_gray;
+        // height: 20px;
+        caret-color: $cursor;
+
+
       }
+    }
+
+    .el-form-item {
+      background: rgba(255, 255, 255, 0.1);
+      // border-radius: 5px;
+    }
+    .logo_white{
+      position: relative;
+      padding: 0;
+      top:3%;
+      margin-bottom: 7%;
+    }
+    .login-button{
+      margin-top: 30px;
+      // height:4px;
+      width:80%;
+      color: #dde5fd;
+      background-color: #000062;
+      text-align: center;
+      font-family: "microsoft yahei";
+      font-size: 10px ;
+      font-stretch: wider;
+      letter-spacing: 0.7px;
+
+      // font-weight: bold;
+      border-radius: 0%;
+      // border: 1px solid red ;
+      line-height: 3px;
     }
   }
 
-  .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
-  }
-}
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
+$bg:#ffffff;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
-.login-container {
-  min-height: 100%;
-  width: 100%;
-  background-color: $bg;
+.login-door{
+  background-image: url(../../assets/door.png);
+  background-repeat: no-repeat;
+  background-position:0% 100%;
+  background-size: 100% 100%;
+  // filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale');
+  // -moz-background-size:100% 100%;
+  border-top: 1px solid rgba($color: #152149, $alpha: 1.0);
+  border-bottom: 1px solid rgba($color: #152149, $alpha: 1.0);
+  border-left: 1px solid rgba($color: #152149, $alpha: 1.0);
+  border-radius: 0.3% 0 0 0.3%;
   overflow: hidden;
-
+  // padding: 0 0 0 0px;
+}
+.login-container {
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/bg.png');
+  // background-color: $bg;
+  // background-size:contain;
+  // background-size: ;
+  background-position: 0% 100%;
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center;
+  overflow: hidden;
+  // overflow-y:hidden;
+  ::-webkit-scrollbar {
+     width: 0;
+  }
   .login-form {
     position: relative;
-    width: 520px;
-    max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
-    overflow: hidden;
+    width: 100%;
+    height:100%;
+    padding: 0 0 0 0px;
+    // 父元素宽度确定的情况下,上下不变动,左右可实现自动居中
+    // margin: 6% 66%;
+    //删
+
+    background-color:$bg;
+    border-radius: 5%;
   }
 
   .tips {
@@ -205,11 +284,14 @@ $light_gray:#eee;
   }
 
   .svg-container {
-    padding: 6px 5px 6px 15px;
+    padding: 6px 0px 6px 15px;
     color: $dark_gray;
+    //
     vertical-align: middle;
     width: 30px;
     display: inline-block;
+    //删
+    // border:solid 1px red
   }
 
   .title-container {

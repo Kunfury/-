@@ -7,22 +7,11 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img src="@/assets/head.png" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              Home
-            </el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
-          <el-dropdown-item divided @click.native="logout">
+          <el-dropdown-item  @click.native="logout">
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -60,6 +49,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.user-dropdown{
+  margin-top: -25px;
+  margin-right: -25px;
+}
 .navbar {
   height: 50px;
   overflow: hidden;
@@ -120,8 +113,8 @@ export default {
 
         .user-avatar {
           cursor: pointer;
-          width: 40px;
-          height: 40px;
+          width: 60px;
+          height: 60px;
           border-radius: 10px;
         }
 

@@ -42,122 +42,188 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
+//name必须与import的component的名字一致，否则将不能缓存
   {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
+    // meta: { title: '主页', icon: 'dashboard' },
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '主页', icon: 'dashboard' },
     }]
   },
 
   {
-    path: '/example',
+    path: '/stu',
     component: Layout,
-    redirect: '/example/table',
+    redirect: '/stu/general',
     name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    meta: { title: '学生信息', icon: 'table' },
     children: [
       {
-        path: 'table',
+        path: 'general',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '学生概况' }
       },
       {
-        path: 'tree',
+        path: 'grades',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: { title: '成绩信息'}
       }
     ]
   },
 
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
 
+
+  // {
+  //   path: '/nested',
+  //   component: Layout,
+  //   redirect: '/nested/menu1',
+  //   name: 'Nested',
+  //   meta: {
+  //     title: 'Nested',
+  //     icon: 'nested'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'menu1',
+  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
+  //       name: 'Menu1',
+  //       meta: { title: 'Menu1' },
+  //       children: [
+  //         {
+  //           path: 'menu1-1',
+  //           component: () => import('@/views/nested/menu1/menu1-1'),
+  //           name: 'Menu1-1',
+  //           meta: { title: 'Menu1-1' }
+  //         },
+  //         {
+  //           path: 'menu1-2',
+  //           component: () => import('@/views/nested/menu1/menu1-2'),
+  //           name: 'Menu1-2',
+  //           meta: { title: 'Menu1-2' },
+  //           children: [
+  //             {
+  //               path: 'menu1-2-1',
+  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+  //               name: 'Menu1-2-1',
+  //               meta: { title: 'Menu1-2-1' }
+  //             },
+  //             {
+  //               path: 'menu1-2-2',
+  //               component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+  //               name: 'Menu1-2-2',
+  //               meta: { title: 'Menu1-2-2' }
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           path: 'menu1-3',
+  //           component: () => import('@/views/nested/menu1/menu1-3'),
+  //           name: 'Menu1-3',
+  //           meta: { title: 'Menu1-3' }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       path: 'menu2',
+  //       component: () => import('@/views/nested/menu2/index'),
+  //       name: 'Menu2',
+  //       meta: { title: 'menu2' }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: 'external-link',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+  //       meta: { title: 'External Link', icon: 'link' }
+  //     }
+  //   ]
+  // },
   {
-    path: '/nested',
+    path:'/alert',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
+    // meta: { roles: ['admin','editor'] },
+    redirect: '/alert/bayes',
+    meta:{title:'学业预警',icon:'eye-open'},
+    children:[{
+      path:'bayes',
+      component:()=>import('@/views/general/dataShow'),
+      name:'贝叶斯预警',
+      meta:{title:"贝叶斯预警"}
     },
+    {path:'manual',
+      component:()=>import('@/views/general/dataShow'),
+      name:'手动筛选预警',
+      meta:{title:"手动筛选预警"}}
+
+    ]
+  },
+  {
+    path:'/charts',
+    component: Layout,
+    // meta: { roles: ['admin','editor'] },
+    redirect: '/charts/general',
+    children:[{
+      path:'general',
+      component:()=>import('@/views/general/dataShow'),
+      name:'图表分析',
+      meta:{title:"图表分析",icon:'el-icon-s-marketing'}
+
+    }
+
+    ]
+  },
+
+  {
+    path: '/edu',
+    component: Layout,
+    redirect: '/edu/homework',
+    meta: { title: '教学辅助', icon: 'form' },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'homework',
+        name: '作业管理',
+        component: () => import('@/views/form/index'),
+        meta: { title: '作业管理' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'absence',
+        name: '出勤管理',
+        component: () => import('@/views/form/index'),
+        meta: { title: '出勤管理' }
       }
     ]
   },
-
   {
-    path: 'external-link',
+    path: '/message',
     component: Layout,
+    redirect: '/message/alert',
+    meta: { title: '消息管理', icon: 'el-icon-message' },
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'alert',
+        name: '预警消息',
+        component: () => import('@/views/form/index'),
+        meta: { title: '预警消息' }
+      },
+      {
+        path: 'notice',
+        name: '通知消息',
+        component: () => import('@/views/form/index'),
+        meta: { title: '通知消息' }
       }
     ]
+
   },
 
   // 404 page must be placed at the end !!!
